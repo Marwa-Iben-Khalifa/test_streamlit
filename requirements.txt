@@ -7,7 +7,6 @@ joblib
 seaborn
 tf-keras
 tensorflow
-sklearn
 gensim
 numpy
 scikit-learn
