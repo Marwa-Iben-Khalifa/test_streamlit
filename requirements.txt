@@ -1,1 +1,13 @@
-streamlit>=1.26.0
+streamlit
+sentence-transformers
+torch
+TensorFlow
+pandas
+joblib
+seaborn
+tf-keras
+tensorflow
+sklearn
+gensim==4.3.3
+numpy==1.23.5
+scikit-learn
