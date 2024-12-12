@@ -92,9 +92,9 @@ if transaction_data is not None and st.button('Predict'):
         y_pred = rf_model.predict(X_transaction)
         transaction_data['predicted_label'] = y_pred
 
-        # Afficher les résultats
+        # Afficher les résultats dans le tableau
         st.write("**Predictions**")
-        st.write(transaction_data[['label', 'predicted_label']])
+        st.dataframe(transaction_data[['label', 'predicted_label']])
 
     except Exception as e:
         st.error(f"Erreur pendant la prédiction : {e}")
