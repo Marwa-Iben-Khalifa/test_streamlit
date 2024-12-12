@@ -37,7 +37,7 @@ def clean_transaction_text(text):
 st.title('Predict Categories 💶')
 with st.expander('Data'):
     st.write('**Raw data**')
-    df = pd.read_csv('https://raw.githubusercontent.com/Marwa-Iben-Khalifa/data/refs/heads/main/date-non-categ.csv')
+    df = pd.read_csv('https://raw.githubusercontent.com/Marwa-Iben-Khalifa/data/refs/heads/main/date-non-categ.csv', on_bad_lines='skip', sep=',')
     st.write(df)
 
 # Sélecteur pour choisir les lignes
