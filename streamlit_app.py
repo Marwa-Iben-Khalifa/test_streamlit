@@ -51,7 +51,7 @@ transaction_data = load_transaction_data()
 if st.button('Predict'):
     try:
         transaction_data['transaction_amount'] = transaction_data['debit'].astype(float) - transaction_data['credit'].astype(float)
-        transaction_data["cleaned_label"] = transaction_data["label"].apply(clean_transaction_text)
+        transaction_data["cleaned_document_label_translated_cleaned"] = transaction_data["label"].apply(clean_transaction_text)
         transaction_data['transaction_type'] = transaction_data['debit'].astype(float).apply(lambda x: 'debit' if x > 0 else 'credit')
 
         # Encodage
@@ -59,7 +59,7 @@ if st.button('Predict'):
         for col in ['journal_code', 'transaction_type']:
             transaction_data[col + '_encoded'] = le.fit_transform(transaction_data[col].astype(str))
 
-        label_onehot = encoder.transform(transaction_data[['cleaned_label']])
+        label_onehot = encoder.transform(transaction_data[['cleaned_document_label_translated_cleaned']])
         features = csr_matrix(transaction_data[['transaction_amount', 'journal_code_encoded', 'transaction_type_encoded']].values)
         X_transaction = hstack([features, label_onehot])
 
