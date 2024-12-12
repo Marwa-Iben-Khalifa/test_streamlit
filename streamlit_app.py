@@ -6,13 +6,11 @@ with st.expander('Data'):
   df= pd.read_csv('https://raw.githubusercontent.com/Marwa-Iben-Khalifa/data/refs/heads/main/data.csv')
   df
 
+import joblib
+rf_model_loaded = joblib.load('rf_model.joblib')
+
 import pickle
 
-# Charger le modèle et l'encodeur
-with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
-with open('encoder.pkl', 'rb') as encoder_file:
-    encoder = pickle.load(encoder_file)
-
-# Titre de l'application
-st.title('Predict Categories 💶')
+# Charger le OneHotEncoder
+with open('encoder.pkl', 'rb') as f:
+    encoder = pickle.load(f)
