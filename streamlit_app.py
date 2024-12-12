@@ -75,9 +75,17 @@ if transaction_data is not None and st.button('Predict'):
         transaction_data["cleaned_document_label_translated_cleaned"] = transaction_data["label"].apply(clean_transaction_text)
         transaction_data['transaction_type'] = transaction_data['debit'].astype(float).apply(lambda x: 'debit' if x > 0 else 'credit')
 
+        # Encode categorical variables
+        le = LabelEncoder()
+        categorical_cols = ['journal_code', 'transaction_type']
+        for col in categorical_cols:
+            transaction_data[col + '_encoded'] = le.fit_transform(transaction_data[col].astype(str))
+
         # Encodage
         label_onehot = encoder.transform(transaction_data[['cleaned_document_label_translated_cleaned']])
-        features = csr_matrix(transaction_data[['transaction_amount']].values)
+        
+        # Préparation de la matrice des caractéristiques
+        features = csr_matrix(transaction_data[['transaction_amount', 'journal_code_encoded', 'transaction_type_encoded']].values)
         X_transaction = hstack([features, label_onehot])
 
         # Prédiction
