@@ -33,28 +33,10 @@ def clean_transaction_text(text):
     text = text.translate(str.maketrans('', '', string.punctuation))
     return text if text else "Information non disponible"
 
-# Charger les données
-df = pd.read_csv('https://raw.githubusercontent.com/Marwa-Iben-Khalifa/data/refs/heads/main/date-non-categ.csv', on_bad_lines='skip', sep=',')
-
-# Afficher les données avec un sélecteur de lignes
-st.title('Select Rows for Prediction')
 with st.expander('Data'):
     st.write('**Raw data**')
-    
-    # Ajouter des checkboxes pour chaque ligne
-    selected_rows = []
-    for i, row in df.iterrows():
-        checkbox = st.checkbox(f"Select Row {i}", key=f"row_{i}")
-        if checkbox:
-            selected_rows.append(i)
-
-    # Filtrer les données sélectionnées
-    if selected_rows:
-        selected_data = df.loc[selected_rows]
-        st.write("**Selected Rows**")
-        st.write(selected_data)
-    else:
-        st.write("No rows selected.")
+    df = pd.read_csv('https://raw.githubusercontent.com/Marwa-Iben-Khalifa/data/refs/heads/main/date-non-categ.csv', on_bad_lines='skip', sep=',')
+    st.write(df)
 
 # Sélecteur pour choisir les lignes
 st.subheader("Select Rows for Prediction")
